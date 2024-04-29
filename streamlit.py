@@ -11,7 +11,8 @@ isActiveMember_encoder = joblib.load('isActiveMember_encoder.pkl')
 
 def main():
     st.title('Churn Model Deployment')
-    
+
+    Surname = st.text_input("Input Surname: ")
     Age = st.number_input("Input Age: ", 0, 100)
     Gender = st.radio("Input Gender: ", ["Male","Female"])
     Tenure = st.selectbox("Tenure: ", list(range(1, 11)))
@@ -22,14 +23,13 @@ def main():
     EstimatedSalary = st.number_input("Estimated Salary: ", 0, 10000000)
     CreditScore = st.number_input("Credit Score: ", 0, 1000)
 
-    
-    data = {'Age': int(Age), 'Gender': Gender, 
+    data = {'Surname': Surname, 'Age': int(Age), 'Gender': Gender, 
             'CreditScore':int(CreditScore),
             'Tenure': int(Tenure), 'Balance':int(Balance),
             'NumOfProducts': NumOfProducts, 'HasCrCard': HasCrCard,
             'IsActiveMember':IsActiveMember,'EstimatedSalary':int(EstimatedSalary)}
     
-    df = pd.DataFrame([list(data.values())], columns=['Age','Gender',  
+    df = pd.DataFrame([list(data.values())], columns=['Surname', 'Age','Gender',  
                                                 'CreditScore', 'Tenure','Balance', 
                                                 'NumOfProducts', 'HasCrCard' ,'IsActiveMember', 'EstimatedSalary'])
     
@@ -39,12 +39,13 @@ def main():
     df = df.replace(hasCrCard_encoder)
     df = df.replace(isActiveMember_encoder)
 
-    df = scaler.fit_transform(df)
-    
+    df = scaler.fit_transform(df.drop('Surname', axis=1))
+
     if st.button('Make Prediction'):
         features = df      
         result = makePrediction(features)
-        st.success(f'The prediction is: {result}')
+        prediction_text = "Churn" if result == 1 else "Not Churn"
+        st.success(f"Mr./Mrs. {Surname} is {prediction_text}")
 
 def makePrediction(features):
     input_array = np.array(features).reshape(1, -1)
