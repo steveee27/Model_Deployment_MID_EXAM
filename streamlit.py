@@ -22,19 +22,28 @@ def main():
     IsActiveMember = st.radio("I am an Active Member : ", ["Yes","No"])
     EstimatedSalary = st.number_input("Estimated Salary: ", 0, 10000000)
     CreditScore = st.number_input("Credit Score: ", 0, 1000)
+    Geography = st.radio("Geography: ", ['France', 'Spain', 'Germany'])
+
+    # Encode Geography
+    geography_encoding = {'France': [0, 0, 1], 'Spain': [0, 1, 0], 'Germany': [1, 0, 0]}
+    geography_encoded = geography_encoding[Geography]
 
     data = {'Surname': Surname, 'Age': int(Age), 'Gender': Gender, 
             'CreditScore':int(CreditScore),
             'Tenure': int(Tenure), 'Balance':int(Balance),
             'NumOfProducts': NumOfProducts, 'HasCrCard': HasCrCard,
-            'IsActiveMember':IsActiveMember,'EstimatedSalary':int(EstimatedSalary)}
+            'IsActiveMember':IsActiveMember,'EstimatedSalary':int(EstimatedSalary),
+            'Geography_France': geography_encoded[0],
+            'Geography_Spain': geography_encoded[1],
+            'Geography_Germany': geography_encoded[2]}
     
     df = pd.DataFrame([list(data.values())], columns = ['Surname', 
                                                         'Age',
                                                         'Gender',  
                                                         'CreditScore', 'Tenure',
                                                         'Balance', 
-                                                        'NumOfProducts', 'HasCrCard' ,'IsActiveMember', 'EstimatedSalary'])
+                                                        'NumOfProducts', 'HasCrCard' ,'IsActiveMember', 'EstimatedSalary',
+                                                        'Geography_France', 'Geography_Spain', 'Geography_Germany'])
             
     scaler = StandardScaler()
 
