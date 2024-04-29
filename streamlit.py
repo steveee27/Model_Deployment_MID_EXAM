@@ -53,7 +53,7 @@ def main():
     # Drop Surname and perform scaling
     df_scaled = scaler.fit_transform(df.drop('Surname', axis=1))
 
-    # Concatenate encoded Geography
+    # Concatenate encoded Geography without adding dimension
     final_input = np.concatenate([df_scaled, [geography_encoded]], axis=1)
 
     if st.button('Make Prediction'):
