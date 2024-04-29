@@ -16,7 +16,7 @@ def main():
     Gender = st.radio("Input Gender: ", ["Male","Female"])
     Tenure = st.number_input("Tenure: ", 0, 10)
     Balance = st.number_input("Balance: ", 0, 10000000)
-    NumOfProducts = st.number_input("Number Of Products:", 1, 4)
+    NumOfProducts = st.selectbox("Number Of Products:", [1, 2, 3, 4])
     HasCrCard = st.radio("I Have a Credit Card: ", ["Yes","No"])
     IsActiveMember = st.radio("I am an Active Member : ", ["Yes","No"])
     EstimatedSalary = st.number_input("Estimated Salary: ", 0, 10000000)
