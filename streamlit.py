@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 
-model = joblib.load('xgb_classifier_model.pkl')
+model = joblib.load('BestModel_XGB_rev.pkl.pkl')
 gender_encoder = joblib.load('gender_encoder.pkl')
 hasCrCard_encoder = joblib.load('hasCrCard_encoder.pkl')
 isActiveMember_encoder = joblib.load('isActiveMember_encoder.pkl')
