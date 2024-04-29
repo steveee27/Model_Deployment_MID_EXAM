@@ -33,7 +33,7 @@ def main():
                                                 'CreditScore', 'Tenure','Balance', 
                                                 'NumOfProducts', 'HasCrCard' ,'IsActiveMember', 'EstimatedSalary'])
     
-    scaler = joblib.load('standard_scaler.pkl')
+    scaler = StandardScaler()
 
     df = df.replace(gender_encoder)
     df = df.replace(hasCrCard_encoder)
