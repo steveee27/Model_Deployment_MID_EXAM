@@ -8,6 +8,7 @@ model = joblib.load('xgb_classifier_model.pkl')
 gender_encoder = joblib.load('gender_encoder.pkl')
 hasCrCard_encoder = joblib.load('hasCrCard_encoder.pkl')
 isActiveMember_encoder = joblib.load('isActiveMember_encoder.pkl')
+geography_encoder = joblib.load('geography_encoder.pkl')
 
 def main():
     st.title('Churn Model Deployment')
@@ -22,22 +23,28 @@ def main():
     IsActiveMember = st.radio("I am an Active Member : ", ["Yes","No"])
     EstimatedSalary = st.number_input("Estimated Salary: ", 0, 10000000)
     CreditScore = st.number_input("Credit Score: ", 0, 1000)
+    Geography = st.radio("Geography: ", ['Germany', 'France', 'Spain'])
 
     data = {'Surname': Surname, 'Age': int(Age), 'Gender': Gender, 
             'CreditScore':int(CreditScore),
             'Tenure': int(Tenure), 'Balance':int(Balance),
             'NumOfProducts': NumOfProducts, 'HasCrCard': HasCrCard,
-            'IsActiveMember':IsActiveMember,'EstimatedSalary':int(EstimatedSalary)}
+            'IsActiveMember':IsActiveMember,'EstimatedSalary':int(EstimatedSalary),
+            'Geography': Geography}
     
     df = pd.DataFrame([list(data.values())], columns=['Surname', 'Age','Gender',  
                                                 'CreditScore', 'Tenure','Balance', 
-                                                'NumOfProducts', 'HasCrCard' ,'IsActiveMember', 'EstimatedSalary'])
+                                                'NumOfProducts', 'HasCrCard' ,'IsActiveMember', 'EstimatedSalary', 'Geography'])
     
     scaler = StandardScaler()
 
     df = df.replace(gender_encoder)
     df = df.replace(hasCrCard_encoder)
     df = df.replace(isActiveMember_encoder)
+    df = df.replace(geography_encoder)
+
+    # One-hot encoding for Geography
+    df = pd.get_dummies(df, columns=['Geography'], drop_first=True)
 
     df = scaler.fit_transform(df.drop('Surname', axis=1))
 
