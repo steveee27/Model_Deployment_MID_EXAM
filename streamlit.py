@@ -10,7 +10,7 @@ hasCrCard_encoder = joblib.load('hasCrCard_encoder.pkl')
 isActiveMember_encoder = joblib.load('isActiveMember_encoder.pkl')
 
 def main():
-    st.title('Churn Model Deployment')
+    st.markdown("<h1 style='text-align: center;'>Churn Model Deployment</h1>", unsafe_allow_html=True)
 
     Surname = st.text_input("Input Surname: ")
     Age = st.number_input("Input Age: ", 0, 100)
