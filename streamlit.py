@@ -44,18 +44,18 @@ def main():
                                                         'Balance', 
                                                         'NumOfProducts', 'HasCrCard' ,'IsActiveMember', 'EstimatedSalary',
                                                         'Geography_France', 'Geography_Spain', 'Geography_Germany'])
-            
-    # scaler = StandardScaler()
+    
+    scaler = StandardScaler()
+
+    # Scale only specific columns
+    df[['CreditScore', 'Age', 'Balance', 'EstimatedSalary']] = scaler.fit_transform(df[['CreditScore', 'Age', 'Balance', 'EstimatedSalary']])
 
     df = df.replace(gender_encoder)
     df = df.replace(hasCrCard_encoder)
     df = df.replace(isActiveMember_encoder)
 
-    # df = scaler.fit_transform(df.drop('Surname', axis=1)
-    df = df.drop('Surname', axis=1)
-
     if st.button('Make Prediction'):
-        features = df      
+        features = df.drop('Surname', axis=1)      
         result = makePrediction(features)
         prediction_text = "Churn" if result == 1 else "Not Churn"
         st.success(f"Mr./Mrs. {Surname} is {prediction_text}")
