@@ -53,7 +53,7 @@ def main():
 
     df = scaler.fit_transform(df.drop('Surname', axis=1))
 
-    if st.button('Make Prediction', style='display: block; margin: 0 auto;'):
+    if st.button('Make Prediction', key='make_prediction'):
         features = df      
         result = makePrediction(features)
         prediction_text = "Churn" if result == 1 else "Not Churn"
