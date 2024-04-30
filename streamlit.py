@@ -52,7 +52,7 @@ def main():
     df = df.replace(isActiveMember_encoder)
 
     # df = scaler.fit_transform(df.drop('Surname', axis=1)
-    df = df.drop('Surname', axis=1))
+    df = df.drop('Surname', axis=1)
 
     if st.button('Make Prediction'):
         features = df      
