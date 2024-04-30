@@ -59,6 +59,8 @@ def main():
         prediction_text = "Churn" if result == 1 else "Not Churn"
         st.success(f"Mr./Mrs. {Surname} is {prediction_text}")
 
+    st.markdown("<p style='text-align: center; font-size: small;'>Created by Steve Marcello Liem / 2602071410 / LA-09</p>", unsafe_allow_html=True)
+
 def makePrediction(features):
     input_array = np.array(features).reshape(1, -1)
     prediction = model.predict(input_array)
