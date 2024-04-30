@@ -12,9 +12,10 @@ isActiveMember_encoder = joblib.load('isActiveMember_encoder.pkl')
 def main():
     st.markdown("<h1 style='text-align: center;'>Churn Model Deployment</h1>", unsafe_allow_html=True)
 
-    Surname = st.text_input("Input Surname: ")
-    Age = st.number_input("Input Age: ", 0, 100)
+    Surname = st.text_input("Surname: ")
+    Age = st.number_input("Age: ", 0, 100)
     Gender = st.radio("Input Gender: ", ["Male","Female"])
+    Geography = st.radio("Geography: ", ['France', 'Spain', 'Germany'])
     Tenure = st.selectbox("Tenure: ", list(range(1, 11)))
     Balance = st.number_input("Balance: ", 0, 10000000)
     NumOfProducts = st.selectbox("Number Of Products:", [1, 2, 3, 4])
@@ -22,7 +23,6 @@ def main():
     IsActiveMember = st.radio("I am an Active Member : ", ["Yes","No"])
     EstimatedSalary = st.number_input("Estimated Salary: ", 0, 10000000)
     CreditScore = st.number_input("Credit Score: ", 0, 1000)
-    Geography = st.radio("Geography: ", ['France', 'Spain', 'Germany'])
 
     # Encode Geography
     geography_encoding = {'France': [0, 0, 1], 'Spain': [0, 1, 0], 'Germany': [1, 0, 0]}
