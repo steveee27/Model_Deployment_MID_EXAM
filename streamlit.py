@@ -45,13 +45,13 @@ def main():
                                                         'NumOfProducts', 'HasCrCard' ,'IsActiveMember', 'EstimatedSalary',
                                                         'Geography_France', 'Geography_Spain', 'Geography_Germany'])
             
-    scaler = StandardScaler()
+    # scaler = StandardScaler()
 
     df = df.replace(gender_encoder)
     df = df.replace(hasCrCard_encoder)
     df = df.replace(isActiveMember_encoder)
 
-    df = scaler.fit_transform(df.drop('Surname', axis=1))
+    # df = scaler.fit_transform(df.drop('Surname', axis=1))
 
     if st.button('Make Prediction'):
         features = df      
